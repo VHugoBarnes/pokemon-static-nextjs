@@ -12,6 +12,7 @@ export const Navbar = () => {
           width={80}
           height={80}
           className="w-20 h-20"
+          priority
         />
         <h2 className="text-3xl">P</h2>
         <h3 className="text-xl">okemon</h3>
