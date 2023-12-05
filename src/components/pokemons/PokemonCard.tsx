@@ -2,6 +2,7 @@ import { SmallPokemon } from "@/interfaces";
 import { Card, CardBody, Image } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import React from "react";
+import NextImage from "next/image";
 
 interface Prop {
   pokemon: SmallPokemon
@@ -18,6 +19,8 @@ export const PokemonCard = ({ pokemon }: Prop) => {
     <Card key={pokemon.id} isHoverable isPressable onClick={onClick}>
       <CardBody className="flex flex-row space-x-2 items-start">
         <Image
+          as={NextImage}
+          isBlurred
           src={pokemon.img}
           alt={pokemon.name}
           width={160}
