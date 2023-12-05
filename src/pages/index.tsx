@@ -2,9 +2,9 @@ import { GetStaticProps, NextPage } from "next";
 import { Card, CardBody, Image } from "@nextui-org/react";
 
 import { Layout } from "@/components/layouts";
+import { PokemonCard } from "@/components/pokemons";
 import { pokeApi } from "@/api";
 import { PokemonListResponse, SmallPokemon } from "@/interfaces";
-import { capitalizeString } from "@/helpers";
 
 interface Props {
   pokemons: SmallPokemon[]
@@ -13,24 +13,9 @@ interface Props {
 const Home: NextPage<Props> = ({ pokemons }) => {
   return (
     <Layout title="Home">
-      <div className="grid grid-cols-3 gap-6 p">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {
-          pokemons.map((pokemon) => (
-            <Card key={pokemon.id}>
-              <CardBody className="flex flex-row space-x-2">
-                <Image
-                  src={pokemon.img}
-                  alt={pokemon.name}
-                  width={160}
-                  height={160}
-                  loading="lazy"
-                />
-                <h3 className="capitalize font-bold text-xl">
-                  {pokemon.name}
-                </h3>
-              </CardBody>
-            </Card>
-          ))
+          pokemons.map((pokemon) => (<PokemonCard key={pokemon.id} pokemon={pokemon} />))
         }
       </div>
     </Layout>

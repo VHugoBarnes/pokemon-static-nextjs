@@ -1,4 +1,4 @@
-export interface Pokemon {
+export interface PokemonInfo {
   abilities: Ability[];
   base_experience: number;
   forms: Species[];
