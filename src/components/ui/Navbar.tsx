@@ -1,10 +1,10 @@
 import React from "react";
-import { Navbar as NextNavbar, NavbarBrand, NavbarContent, NavbarItem, Spacer, Link } from "@nextui-org/react";
+import { Navbar as NextNavbar, NavbarBrand, NavbarContent, NavbarItem, Link } from "@nextui-org/react";
 import Image from "next/image";
 
 export const Navbar = () => {
   return (
-    <NextNavbar>
+    <NextNavbar isBlurred>
       <NavbarBrand >
         <Link href="/" color="foreground">
           <Image
