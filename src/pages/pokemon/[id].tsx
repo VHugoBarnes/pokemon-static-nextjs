@@ -1,17 +1,31 @@
 import React from "react";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { Button, Card, CardBody, CardHeader, Image, Skeleton } from "@nextui-org/react";
 
 import { PokemonInfoResponse } from "@/interfaces";
 import { Layout } from "@/components/layouts";
 import { pokeApi } from "@/api";
 import { capitalizeString } from "@/helpers";
-import { Button, Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+import { localFavorites } from "@/utils";
 
 interface Props {
   pokemon: PokemonInfoResponse
 };
 
 const PokemonPage: NextPage<Props> = ({ pokemon }) => {
+  const [loadingFavorite, setLoadingFavorite] = React.useState<boolean>(true);
+  const [isInFavorites, setIsInFavorites] = React.useState<boolean>(false);
+
+  const onToggleFavorite = () => {
+    localFavorites.toggleFavorite(pokemon.id);
+    setIsInFavorites(!isInFavorites);
+  };
+
+  React.useEffect(() => {
+    setIsInFavorites(localFavorites.isInFavorites(pokemon.id));
+    setLoadingFavorite(false);
+  }, [pokemon.id]);
+
   return (
     <Layout title={capitalizeString(pokemon.name)}>
       <div className="gap-4 flex flex-col lg:flex-row">
@@ -33,9 +47,15 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
             <h3 className="text-2xl font-bold capitalize">
               {pokemon.name}
             </h3>
-            <Button className="border-blue-500" variant="bordered">
-              Guardar en favoritos
-            </Button>
+            <Skeleton isLoaded={!loadingFavorite} className="rounded-xl">
+              <Button
+                className={`${isInFavorites ? "border-red-500" : "border-blue-500"}`}
+                variant="bordered"
+                onClick={onToggleFavorite}
+              >
+                {isInFavorites ? "Eliminar de favoritos" : "Guardar en favoritos"}
+              </Button>
+            </Skeleton>
           </CardHeader>
           <CardBody>
             <h4 className="text-xl">
