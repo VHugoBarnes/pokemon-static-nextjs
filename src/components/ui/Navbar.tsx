@@ -21,7 +21,7 @@ export const Navbar = () => {
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Link href="/favorites">Favoritos</Link>
+          <Link href="/favorites">Favorites</Link>
         </NavbarItem>
       </NavbarContent>
     </NextNavbar>

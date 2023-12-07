@@ -30,9 +30,14 @@ const isInFavorites = (id: number): boolean => {
   return false;
 };
 
+const pokemons = (): number[] => {
+  return JSON.parse(localStorage.getItem("favorites") ?? "[]");
+};
+
 const toExport = {
   toggleFavorite: toggleFavorite,
-  isInFavorites: isInFavorites
+  isInFavorites: isInFavorites,
+  pokemons: pokemons,
 };
 
 export default toExport;
