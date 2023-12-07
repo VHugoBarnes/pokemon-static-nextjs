@@ -124,7 +124,11 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const { name } = params as { name: string };
-  return await getPokemonInfo(name);
+
+  return {
+    props: await getPokemonInfo(name),
+    revalidate: 86400 // each day
+  };
 };
 
 export default PokemonPage;
