@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layouts";
 import { NoFavoritePokemons } from "@/components/pokemons/NoFavoritePokemons";
 import { SmallPokemonCard } from "@/components/pokemons/SmallPokemonCard";
-import { localFavorites } from "@/utils";
+import { localFavorites } from "@/utils/";
 import { Card, Skeleton } from "@nextui-org/react";
 import React from "react";
 

@@ -8,7 +8,7 @@ import { PokemonInfoResponse, PokemonListResponse } from "@/interfaces";
 import { Layout } from "@/components/layouts";
 import { pokeApi } from "@/api";
 import { capitalizeString } from "@/helpers";
-import { localFavorites } from "@/utils";
+import { getPokemonInfo, localFavorites } from "@/utils";
 
 interface Props {
   pokemon: PokemonInfoResponse
@@ -124,21 +124,7 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const { name } = params as { name: string };
-  const { data } = await pokeApi.get<PokemonInfoResponse>(`/pokemon/${name}`);
-
-  return {
-    props: {
-      pokemon: {
-        id: data.id,
-        name: data.name,
-        height: data.height,
-        sprites: data.sprites,
-        stats: data.stats,
-        types: data.types,
-        weight: data.weight
-      }
-    }
-  };
+  return await getPokemonInfo(name);
 };
 
 export default PokemonPage;
